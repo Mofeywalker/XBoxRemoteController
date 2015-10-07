@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 public class XBoxRemoteController implements Runnable {
 
     private static int PORT = 12001;
+    private static int RESOLUTION = 100;
     
     private XboxController xc;
     
@@ -61,7 +62,7 @@ public class XBoxRemoteController implements Runnable {
 
         xc.addXboxControllerListener(new XboxControllerAdapter() {
             public void leftTrigger(double value) {
-                leftThrottle = (int) (value * 254);
+                leftThrottle = (int) (value * RESOLUTION);
             }
             
             public void rightShoulder(boolean pressed) {
@@ -73,7 +74,7 @@ public class XBoxRemoteController implements Runnable {
             }
             
             public void rightTrigger(double value) {
-                rightThrottle = (int) (value * 254);
+                rightThrottle = (int) (value * RESOLUTION);
             }
             
             public void leftShoulder(boolean pressed) {
