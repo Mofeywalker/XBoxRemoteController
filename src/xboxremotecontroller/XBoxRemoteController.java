@@ -48,7 +48,7 @@ public class XBoxRemoteController implements Runnable {
     @Override
     public void run() {
         // init controller
-        xc = new XboxController();
+        xc = new XboxController(is64bit()?"xboxcontroller64":"xboxcontroller", 1, 50, 50);
 
         // check if controller is connected
         if (!xc.isConnected()) {
@@ -124,4 +124,7 @@ public class XBoxRemoteController implements Runnable {
         this.running = false;
     }
     
+    static boolean is64bit() {
+        return System.getProperty("sun.arch.data.model").equals("64");
+    }
 }
