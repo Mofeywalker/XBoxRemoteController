@@ -5,6 +5,7 @@
  */
 package xboxremotecontroller;
 
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -23,6 +24,8 @@ public class ControllerGUI extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("ControllerServer");
+        this.runningIndicator.setOpaque(true);
+        runningIndicator.setBackground(Color.RED);
     }
 
     /**
@@ -34,12 +37,26 @@ public class ControllerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         remoteHostField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         startButton = new javax.swing.JButton();
         stopButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         intervallField = new javax.swing.JTextField();
+        runningIndicator = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +87,10 @@ public class ControllerGUI extends javax.swing.JFrame {
 
         intervallField.setText("50");
 
+        runningIndicator.setText("     ");
+
+        jLabel3.setText("running:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,10 +107,14 @@ public class ControllerGUI extends javax.swing.JFrame {
                             .addComponent(remoteHostField, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                             .addComponent(intervallField)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(stopButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(startButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(runningIndicator)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -104,7 +129,10 @@ public class ControllerGUI extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(intervallField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(startButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(startButton)
+                    .addComponent(runningIndicator)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(stopButton)
                 .addGap(7, 7, 7))
@@ -122,11 +150,13 @@ public class ControllerGUI extends javax.swing.JFrame {
         xc = new XBoxRemoteController(remoteHostField.getText(), Integer.parseInt(intervallField.getText()));
         t = new Thread(xc);
         t.start();
+        runningIndicator.setBackground(Color.GREEN);
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         // TODO add your handling code here:
         xc.stopServer();
+        runningIndicator.setBackground(Color.RED);
     }//GEN-LAST:event_stopButtonActionPerformed
 
     /**
@@ -134,7 +164,7 @@ public class ControllerGUI extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -144,7 +174,6 @@ public class ControllerGUI extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ControllerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -160,7 +189,10 @@ public class ControllerGUI extends javax.swing.JFrame {
     private javax.swing.JTextField intervallField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField remoteHostField;
+    private javax.swing.JLabel runningIndicator;
     private javax.swing.JButton startButton;
     private javax.swing.JButton stopButton;
     // End of variables declaration//GEN-END:variables
