@@ -167,6 +167,7 @@ public class ControllerGUI extends javax.swing.JFrame {
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         // TODO add your handling code here:
         xc.stopServer();
+        xc = null;
         runningIndicator.setBackground(Color.RED);
     }//GEN-LAST:event_stopButtonActionPerformed
 
